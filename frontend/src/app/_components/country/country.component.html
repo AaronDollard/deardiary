@@ -1,0 +1,37 @@
+<div class="listBox">
+    <h5>{{country?.name}}</h5>
+    <p><b>Nationality:</b> {{country?.nationality}}</p>
+    <p><b>Language:</b> {{country?.natLang}}</p>
+    <p><b>Visit notes:</b> {{country?.note}}</p>
+    <button class="btn btn-dark" [routerLink]="['/user']">Back</button>
+</div>
+
+
+<div *ngIf="country" class="listBox">
+    <form>
+        <div class="form-group">
+            <label for="nameInput">Edit name</label>
+            <input [(ngModel)]="country.name" type="text" class="form-control" name="name" placeholder="{{country?.name}}">
+        </div>
+
+        <div class="form-group">
+            <label for="nationalityInput">Edit nationality</label>
+            <input [(ngModel)]="country.nationality" type="text" class="form-control" name="nationality" placeholder="{{country?.nationality}}">
+        </div>
+
+        <div class="form-group">
+            <label for="natLangInput">Edit national language</label>
+            <input [(ngModel)]="country.natLang" type="text" class="form-control" name="natLang" placeholder="{{country?.natLang}}">
+        </div>
+
+
+        <div class="form-group">
+            <label for="notesInput">Edit notes</label>
+            <input [(ngModel)]="country.note" type="text" class="form-control" name="note" placeholder="{{country?.note}}">
+        </div>
+
+
+        <button type="button" class="btn btn-dark" (click)="updateCountry()">Update</button>
+        <button type="button" class="btn btn-dark" id="functionBtn" (click)="deleteCountry()">Delete</button>
+    </form>
+</div>

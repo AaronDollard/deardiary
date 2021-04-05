@@ -1,0 +1,7 @@
+export interface ICountry {
+    _id: string;
+    name: string;
+    nationality: string;
+    natLang: string;
+    note: string;
+}
