@@ -10,9 +10,10 @@ const userSchema = new Schema(
         username: { type: String, require: true },
         email: { type: String, require: true },
         password: { type: String, require: true },
+        creation_dt: { type:Date, require:true},
         countries: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'country'
+            ref: 'countries'
         }]
     },
     { toJSON: { virtuals: true } })

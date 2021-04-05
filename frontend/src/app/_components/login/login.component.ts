@@ -15,9 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private _router:Router, 
-    private route: ActivatedRoute, 
-    private UserServiceService: UserServiceService,
-    private AuthService: AuthService) { }
+    private AuthService: AuthService,
+    private _userService: UserServiceService) { }
 
   ngOnInit(): void {
   }
@@ -28,14 +27,14 @@ export class LoginComponent implements OnInit {
       password: this.password
     }
 
-    this.AuthService.authenticateUser(user).subscribe(data => {
-      if(data.success){
-        this.AuthService.storeUserData(data.token, data.user),
+    this.AuthService.loginUser(user).subscribe((response) => {
+      // if(data){
+        // this.AuthService.storeUserData(data) //,data.user),
         console.log("You are logged in")
         this._router.navigate(['home'])
-      } else{
-        console.log(data.msg)
-      }
+      // } else{
+        // console.log(data)
+      // }
     });
   }
 }

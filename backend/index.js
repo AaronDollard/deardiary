@@ -6,7 +6,6 @@ const user = require('./routes/user');
 const mongoose = require('mongoose');
 const config = require('./config');
 var cors = require('cors');
-const passport = require('passport');
 
 const app = express();
 const port = 3000;
@@ -38,11 +37,6 @@ db.once('open', () => {
 // Configuring the built-in express body parser middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-//Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
-require('./passport')(passport);
 
 
 //Cors middleware

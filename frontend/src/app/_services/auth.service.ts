@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from "rxjs/operators";
+import { catchError, map } from "rxjs/operators";
 import { environment } from '@environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { JwtHelperService  } from '@auth0/angular-jwt';
+import { IUser } from '@app/_models/user';
 
 const BASE_URL = environment.apiUrl;
 
@@ -11,8 +12,19 @@ const BASE_URL = environment.apiUrl;
   providedIn: 'root'
 })
 export class AuthService {
+  currentUserID: string;
+  tokenID:any;
+
+  helper = new JwtHelperService();
   authToken: any;
   user: any;
+
+  CurrentUser: IUser;
+  currentUser: IUser = {
+    _id: null,
+    username: null,
+    email: null,
+  };
 
   constructor(
     private http:HttpClient,
@@ -25,9 +37,25 @@ export class AuthService {
   }
 
   //returns token of succesful user login
-  authenticateUser(user) {
+  loginUser(user): Observable<any> {
     let httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<any>( BASE_URL + 'user/authenticate', user, httpOptions);
+    return this.http.post<any>( BASE_URL + 'user/login', user, httpOptions)      
+    .pipe(
+      map((response: any) => {
+        const user = response;
+
+        //if the returned status message is success, do
+        if (user.success) {
+          localStorage.setItem("token", user.token);
+          const decodedToken = this.helper.decodeToken(response.token);
+
+          this.currentUser._id = decodedToken.id;
+          this.currentUser.username = decodedToken.username;
+          this.ObtainID();
+          return this.currentUser;
+        }
+      }, catchError(this.handleError))
+    );;
   }
 
   //get a users profile
@@ -37,22 +65,28 @@ export class AuthService {
       'Content-Type': 'application/json',
       'Authorization': this.authToken
     });
-    console.log(this.user)
+    //console.log(this.user)
     return this.http.get<any>( BASE_URL + 'user/profile', {headers: headers});
   }
 
-
-  //store user data
-  storeUserData(token, user){
-    localStorage.setItem('id_token', token);
-    localStorage.setItem('user', JSON.stringify(user));
-    this.authToken = token;
-    this.user = user;
+  //Obtain ID for current user
+  ObtainID() {
+    this.tokenID = localStorage.getItem('token');
+    this.currentUserID = this.tokenID;
+    console.log("This is the current user ID " + this.currentUserID);
+    return this.currentUserID; 
   }
+
+
+  // //store user data
+  // storeUserData(token){
+  //   localStorage.setItem('token', token);
+  //   this.authToken = token;
+  // }
 
   //load the token for a user from local storage
   loadToken(){
-    const token = localStorage.getItem('id_token');
+    const token = localStorage.getItem('token');
     this.authToken = token;
   }
 
@@ -67,5 +101,9 @@ export class AuthService {
     this.authToken = null,
     this.user = null,
     localStorage.clear();
+  }
+
+  handleError(err) {
+    return throwError(err);
   }
 }

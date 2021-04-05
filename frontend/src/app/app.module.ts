@@ -36,7 +36,7 @@ const appRoutes: Routes = [
 
   //Used for guards
   export function tokenGetter(){ 
-    return localStorage.getItem("id_token");
+    return localStorage.getItem("token");
 }
 
 @NgModule({

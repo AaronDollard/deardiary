@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserServiceService } from 'src/app/_services/user-service.service';
 import { Router } from '@angular/router';
+import { AuthService } from '@app/_services/auth.service';
 
 @Component({
   selector: 'app-user-form',
@@ -9,6 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent implements OnInit {
+  currentUserID: string='';
+
 
   countryForm: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required]),
@@ -17,9 +20,14 @@ export class UserFormComponent implements OnInit {
   })
 
   //Implement the user service
-  constructor(private _router:Router, private _userService:UserServiceService) { }
+  constructor(
+    private _router:Router, 
+    private _authService:AuthService,
+    private _userService:UserServiceService
+    ) { }
 
   ngOnInit(): void {
+    this.currentUserID = this._authService.ObtainID();
   }
 
   //Log country function

@@ -8,7 +8,16 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  user:object;
+  
   ngOnInit(): void {
+    this.AuthService.getProfile().subscribe(
+      profile => { this.user = profile.user;
+    },
+      err => {
+        console.log(err);
+        return false;
+      });
   }
 
   constructor( 

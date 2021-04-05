@@ -5,6 +5,8 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators'
 import { environment } from '@environments/environment';
 import { IUser } from "../_models/user"
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { AuthService } from './auth.service';
 
 const BASE_URL = environment.apiUrl;
 
@@ -12,45 +14,51 @@ const BASE_URL = environment.apiUrl;
   providedIn: 'root'
 })
 export class UserServiceService {
+  helper = new JwtHelperService();
 
   currentUser: IUser = {
     _id: null,
     username: null,
+    email: null
   };
 
-  constructor(private _http: HttpClient) { }
+  constructor(
+    private _http: HttpClient,
+    //private _authService: AuthService
+    ) { }
 
-//BELOW IS FOR LOGIN AND REGISTRATION OF USERS
-registerUser(body: any) {
-  return this._http.post( BASE_URL + "user", body, {
-    observe: 'body',
-    headers: new HttpHeaders().append('Content-Type', 'application/json')
-  });
-}
+// //BELOW IS FOR LOGIN AND REGISTRATION OF USERS
+// registerUser(body: any) {
+//   return this._http.post( BASE_URL + "user/register", body, {
+//     observe: 'body',
+//     headers: new HttpHeaders().append('Content-Type', 'application/json')
+//   });
+// }
 
-userLogin(body: any): Observable<IUser> {
-  return this._http.post( BASE_URL + "users", body, {
-      observe: "body",
-      headers: new HttpHeaders().append("Content-Type", "application/json"),
-    })
-    .pipe(
-     map((response: any) => {
-      const user = response;
+// loginUser(body: any): Observable<IUser> {
+//   return this._http.post( BASE_URL + "user/login", body, {
+//       observe: "body",
+//       headers: new HttpHeaders().append("Content-Type", "application/json"),
+//     })
+//     .pipe(
+//      map((response: any) => {
+//       const user = response;
 
-      //if the returned status message is success, do
-      if (user.success) {
+//       //if the returned status message is success, do
+//       if (user.success) {
+//         localStorage.setItem("token", user.token);
+//         const decodedToken = this.helper.decodeToken(response.token);
 
-        this.currentUser._id = user._id;
-        this.currentUser.username = user.username;
-        return this.currentUser;
-      }
-    }, catchError(this.handleError))
-  )}
+//         this.currentUser._id = decodedToken.id;
+//         this.currentUser.username = decodedToken.username;
+//         this.currentUser.email = decodedToken.email;
+//         this._authService.ObtainID
+//         return this.currentUser;
+//       }
+//     }, catchError(this.handleError))
+//   )}
 
 
-
-//###########################################
-//###########################################
   getCountries(): Observable<ICountry[]> {
     console.log("GetCountries called and displaying DB!" );
     return this._http.get<ICountry[]>(BASE_URL + "countries")
