@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '@app/_services/auth.service';
-import { UserServiceService } from '@app/_services/user-service.service';
+import { UserService } from '../../_services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -10,31 +9,31 @@ import { UserServiceService } from '@app/_services/user-service.service';
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
-  username:String;
-  password:String;
+  hide = true;
+
+  loginForm: FormGroup = new FormGroup({
+    email: new FormControl(null, [Validators.email, Validators.required]),
+    password: new FormControl(null, Validators.required),
+  });
 
   constructor(
     private _router:Router, 
-    private AuthService: AuthService,
-    private _userService: UserServiceService) { }
+    private _userService: UserService) { }
 
   ngOnInit(): void {
   }
 
-  onLoginSubmit(){
-    const user = {
-      username: this.username,
-      password: this.password
-    }
+  login() {
 
-    this.AuthService.loginUser(user).subscribe((response) => {
-      // if(data){
-        // this.AuthService.storeUserData(data) //,data.user),
-        console.log("You are logged in")
-        this._router.navigate(['home'])
-      // } else{
-        // console.log(data)
-      // }
-    });
+    // (subscribe to the register method on the user service to log in)
+    this._userService.login(JSON.stringify(this.loginForm.value)).subscribe(
+      (response) => {
+        console.log("Entered the success method in the login component");
+        this._router.navigate(["/"]);
+      },
+      (error) => {
+      }
+    );
   }
+
 }

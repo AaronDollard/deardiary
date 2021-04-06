@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 //Used for form
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { UserServiceService } from '@app/_services/user-service.service';
+import { UserService } from '../../_services/user.service';
 import { ValidateService } from '../../_services/validate.service';
-import { AuthService } from '../../_services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -12,45 +11,54 @@ import { AuthService } from '../../_services/auth.service';
   styleUrls: ['./register.component.less']
 })
 export class RegisterComponent implements OnInit {
+  //booleans for showing/hiding passwords
+  hide1 = true;
+  hide2 = true;
 
-  username: string;
-  email: string;
-  password: string
+  //Register FormGroup
+  registerForm: FormGroup = new FormGroup({
+    email: new FormControl(null, [Validators.email, Validators.required]),
+    username: new FormControl(null, Validators.required),
+    password: new FormControl(null, Validators.required),
+    cpass: new FormControl(null, Validators.required),
+  });
 
   constructor(
     private _router: Router,
     private ValidateService: ValidateService,
-    private AuthService: AuthService
+    private UserService: UserService
   ) { }
 
   ngOnInit(): void {
   }
 
-  //Register user
-  onRegisterSubmit() {
-    const user = {
-      username: this.username,
-      email: this.email,
-      password: this.password
-    }
-    //validate all fields are filled
-    if (!this.ValidateService.validateRegister(user)) {
-      console.log("All fields are required");
-      return false;
-    }
-
-    //validate email bein used
-    if (!this.ValidateService.validateEmail(this.email)) {
-      console.log("Enter a valid email");
-      return false;
-    }
-
-    //register the user
-    this.AuthService.registerUser(user).subscribe(data => {
-      if (data.success) {
-        console.log("you are registered")
-        this._router.navigate(['/login'])
+  register() {
+      if (!this.ValidateService.validateRegister(this.registerForm)) {
+        return false;
       }
-    });
-  }
+    // (validate that the entered password is a valid password)
+      if (
+        !this.ValidateService.validateRegisterPassword( this.registerForm.controls.password.value)) {
+        return false;
+      }
+
+    // (validate that the entered email is a valid email)
+      if (!this.ValidateService.validateEmail(this.registerForm.controls.email.value)) {
+        return false;
+      }
+    // (subscribe to the register method on the user service to log in)
+      this.UserService
+        .register(JSON.stringify(this.registerForm.value))
+        .subscribe(
+          (data) => {
+          // (if the boolean "success" returns true, display the returned message to the user and redirect them to the 'user' page)
+            if ((data as any).success) {
+              this._router.navigate(["/login"]);
+            }
+          // (if there is an error display the returned error message to the user)
+          },
+          (error) => {
+          }
+        );
+    }
 };

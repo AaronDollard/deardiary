@@ -3,22 +3,23 @@
     <div class="col-sm-12">
       <h1>Login below</h1>
       <!--Binds the Form to the FormGroup in user-form component ts-->
-      <form (submit)="onLoginSubmit()">
-  
-        <div class="form-group">
-          <label>Username</label>
-          <input [(ngModel)]="username" name="username" type="text" class="form-control" placeholder="">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div>
+          <input id="email" formControlName="email" placeholder="Enter your email" />
         </div>
-  
-        <div class="form-group">
-          <label>Password</label>
-          <input [(ngModel)]="password" name="password" type="text" class="form-control" placeholder="">
+
+        <div>
+          <input id="password1" formControlName="password" placeholder="Enter your password"/>
         </div>
-  
-          <!--bottom of login form-->
-          <div class="form-group" style="text-align:center;">
-            <button type="submit" value ="submit" class="btn btn-dark">Login</button>
-          </div>
+
+        <div>
+          <button type="submit" class="mat-raised-button mat-primary">
+            Login
+          </button>
+          <button routerLink="/register" class="divider">
+            No Account? Create one here
+          </button>
+        </div>
       </form>
     </div>
   </div>

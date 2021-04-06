@@ -13,25 +13,25 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <li *ngIf="AuthService.loggedIn()" routerLinkActive="active" class="nav-item">
+      <li  routerLinkActive="active" class="nav-item">
         <a class="nav-link" [routerLink]="['/user']" >Countries</a>
       </li>
-      <li *ngIf="AuthService.loggedIn()" routerLinkActive="active" class="nav-item">
+      <li  routerLinkActive="active" class="nav-item">
         <a class="nav-link" [routerLink]="['/form']" >Diary</a>
       </li>
 
 
       <div class="navbar-nav">
-        <a *ngIf="AuthService.loggedIn()" class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/profile']">Profile</a>
+        <a  class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/profile']">Profile</a>
       </div>
       <div class="navbar-nav">
-        <a *ngIf="!AuthService.loggedIn()" class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/login']">Login</a>
+        <a  class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/login']">Login</a>
       </div>
       <div class="navbar-nav">
-        <a  *ngIf="!AuthService.loggedIn()" class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/register']">Register</a>
+        <a   class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/register']">Register</a>
       </div>
       <div class="navbar-nav">
-        <a *ngIf="AuthService.loggedIn()" class="nav-item nav-link" [routerLink]="['/home']" (click)="logout()">Logout</a>
+        <a  class="nav-item nav-link" [routerLink]="['/home']">Logout</a>
       </div>
     </ul>
   </div>

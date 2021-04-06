@@ -1,11 +1,11 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const countries = require('./routes/countries');
 const user = require('./routes/user');
 const mongoose = require('mongoose');
 const config = require('./config');
 var cors = require('cors');
+var indexRouter = require('./routes/index');
 
 const app = express();
 const port = 3000;
@@ -47,7 +47,7 @@ app.use(cors(
 }
 ));
 
-app.use('/countries', countries);
+app.use('/countries', indexRouter);
 app.use('/user', user);
 
 

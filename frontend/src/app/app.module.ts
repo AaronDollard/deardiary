@@ -16,10 +16,11 @@ import { ProfileComponent } from './_components/profile/profile.component'
 import { JwtModule } from '@auth0/angular-jwt';
 import { RouterModule, Routes } from '@angular/router';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 //services
-import { UserServiceService } from '../app/_services/user-service.service';
+import { UserService } from './_services/user.service';
 import { ValidateService } from './_services/validate.service';
-import { AuthService } from './_services/auth.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { HomeComponent } from './_components/home/home.component';
 
@@ -42,7 +43,6 @@ const appRoutes: Routes = [
 @NgModule({
     imports: [
         BrowserModule,
-        ReactiveFormsModule,
         HttpClientModule,
         AppRoutingModule,
         HttpClientModule,
@@ -53,8 +53,8 @@ const appRoutes: Routes = [
         ReactiveFormsModule, //Needed for user country form
         Ng2SearchPipeModule, //used for searching import
         JwtModule, //Checks to see if a user is logged in
+        BrowserAnimationsModule,
         JwtModule.forRoot({config: {tokenGetter: tokenGetter}}),
-        
     ],
     declarations: [
         AppComponent,
@@ -67,7 +67,7 @@ const appRoutes: Routes = [
         ProfileComponent,
         HomeComponent
     ],
-    providers: [ UserServiceService, ValidateService, AuthService, AuthGuard ],
-    bootstrap: [AppComponent]
+    providers: [ UserService, ValidateService, AuthGuard ],
+    bootstrap: [ AppComponent]
 })
 export class AppModule { }
