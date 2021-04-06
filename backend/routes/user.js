@@ -1,6 +1,6 @@
 const router = require("express").Router();
 var User = require("../models/user");
-const Countries = require("../models/country");
+const Country = require("../models/country");
 const checkAuth = require("../utilities/check-auth");
 
 // Bring in the User Registration Function, User Login Function
@@ -13,7 +13,7 @@ const {
 
 // Customer Registration Route
 router.post("/register-user", async (req, res) => {
-  await userRegister(req.body, "user", res);
+  await userRegister(req.body, "adventurer", res);
 });
 
 // Manager  Registration Route
@@ -45,17 +45,17 @@ router.get("/user", checkAuth, async (req, res) => {
 
 async function getUserEntries(req, res, next) {
   const { userId } = req.params;
-  const user = await User.findById(userId).populate("countries");
-  res.status(200).json(user.countries);
+  const user = await User.findById(userId).populate("country");
+  res.status(200).json(user.country);
 }
 
 async function newUserEntries(req, res, next) {
   const { userId } = req.params;
-  const newEntry = new Countries(req.body);
+  const newEntry = new Country(req.body);
   const user = await User.findById(userId);
-  newEntry.customer = user;
+  newEntry.adventurer = user;
   await newEntry.save();
-  user.countries.push(newEntry);
+  user.country.push(newEntry);
   try {
     await user.save();
     res.status(201).json(newEntry);
@@ -64,6 +64,6 @@ async function newUserEntries(req, res, next) {
   }
 }
 
-router.route("/:userId/countries").get(getUserEntries).post(newUserEntries);
+router.route("/:userId/country").get(getUserEntries).post(newUserEntries);
 
 module.exports = router;

@@ -9,23 +9,28 @@ import { HomeComponent } from './_components/home/home.component';
 import { UserFormComponent } from './_components/user-form/user-form.component'
 import { AuthGuard } from './_guards/auth.guard';
 
+  const routes: Routes = [
+    {path:'home', component:HomeComponent},
+    //{path:'dashboard/update/:id', component:AdmindashboardupdateComponent, canActivate: [ManagerGuard]},
+    //{path:'admin', component:StaffPageComponent, canActivate: [StaffGuard]},
 
-const routes: Routes = [
-    //Protected routes
-    {path: "user/:_id", component: CountryComponent, canActivate:[AuthGuard] }, //used when click update on a country from the list
-    {path:'form', component: UserFormComponent, canActivate:[AuthGuard] },
-    {path:'user', component: UserDashboardComponent, canActivate:[AuthGuard] },
-    {path:'country', component: CountryComponent, canActivate:[AuthGuard] },
-    {path:'profile', component: ProfileComponent, canActivate:[AuthGuard] },
+    {path:'login', component:LoginComponent},
+    {path:'register', component:RegisterComponent},
 
-    //Unprotected routes
-    {path:'home', component: HomeComponent},
-    {path:'register', component: RegisterComponent},
-    {path:'login', component: LoginComponent}
-];
+    {path:'countries', component: UserDashboardComponent, canActivate: [AuthGuard] },
+
+    {path:'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+    {path:'user/diary', component: UserFormComponent, canActivate: [AuthGuard] },
+    {path:'user/update/:id', component: CountryComponent, canActivate: [AuthGuard] }
+  ];
+
+
+
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [
+      RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' }),
+  ],
     exports: [RouterModule],
     providers: [ AuthGuard ],
 })

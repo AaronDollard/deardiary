@@ -14,7 +14,6 @@ import { LoginComponent } from './_components/login/login.component'
 import { ProfileComponent } from './_components/profile/profile.component'
 //extras
 import { JwtModule } from '@auth0/angular-jwt';
-import { RouterModule, Routes } from '@angular/router';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -23,32 +22,23 @@ import { UserService } from './_services/user.service';
 import { ValidateService } from './_services/validate.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { HomeComponent } from './_components/home/home.component';
+import { EntryService } from './_services/entry.service';
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table'  
 
-
-
-const appRoutes: Routes = [
-    {path:'form', component: UserFormComponent, canActivate:[AuthGuard]},
-    {path:'user', component: UserDashboardComponent, canActivate:[AuthGuard]},
-    {path:'country', component: CountryComponent, canActivate:[AuthGuard]},
-    {path:'register', component: RegisterComponent},
-    {path:'login', component: LoginComponent},
-    {path:'profile', component: ProfileComponent, canActivate:[AuthGuard] }
-  ]
-
-  //Used for guards
-  export function tokenGetter(){ 
-    return localStorage.getItem("token");
+//Used for guards
+export function tokenGetter(){ return localStorage.loadToken("token");
 }
 
 @NgModule({
     imports: [
+        MatTableModule,
+        CommonModule,
         BrowserModule,
         HttpClientModule,
         AppRoutingModule,
         HttpClientModule,
-        BrowserModule,
         AppRoutingModule,
-        RouterModule.forRoot(appRoutes), //Used for routes
         FormsModule, //Needed for user country form
         ReactiveFormsModule, //Needed for user country form
         Ng2SearchPipeModule, //used for searching import
@@ -67,7 +57,7 @@ const appRoutes: Routes = [
         ProfileComponent,
         HomeComponent
     ],
-    providers: [ UserService, ValidateService, AuthGuard ],
+    providers: [ UserService, ValidateService, AuthGuard, EntryService ],
     bootstrap: [ AppComponent]
 })
 export class AppModule { }

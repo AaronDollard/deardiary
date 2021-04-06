@@ -3,33 +3,28 @@
   <div class="col-sm-12">
     <h1>Register below</h1>
 
-
+    <div class="form-container">
     <form [formGroup]="registerForm" (ngSubmit)="register()" >
-          <div>
+
             <input id="email" formControlName="email" placeholder="Enter your email" />
-          </div>
 
-          <div>
             <input id="username" formControlName="username" placeholder="Enter your username" />
-          </div>
 
-          <div>
             <input id="password1" formControlName="password" placeholder="Enter your password"/>
-          </div>
 
-          <div>
+
+
             <input id="password2" formControlName="cpass" placeholder="Enter your password"/>
-          </div>
+
 
           <div>
-            <button mat-button type="submit"
-                  class="mat-raised-button mat-primary"
-                  >Register</button>
-                  <button mat-button routerLink="/login" class="divider">Have An Account? Login</button>
+            <button id="functionBtn" class="btn btn-dark" type="submit">Register</button>
+            <button id="functionBtn" class="btn btn-dark" routerLink="/login">Have An Account? Login</button>
           </div>
 
       
     </form>
+    </div>
 
   </div>
 </div>

@@ -2,32 +2,32 @@ const db = require("../models");
 
 module.exports = {
   create: function (req, res) {
-    db.Countries.create(req.body)
+    db.Country.create(req.body)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
 
   findAll: function (req, res) {
-    db.Countries.find(req.query)
+    db.Country.find(req.query)
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
 
   remove: function (req, res) {
-    db.Countries.findById({ _id: req.params.id })
+    db.Country.findById({ _id: req.params.id })
       .then((dbModel) => dbModel.remove())
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
 
   findOne: function (req, res) {
-    db.Countries.findById({ _id: req.params.id })
+    db.Country.findById({ _id: req.params.id })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
 
   findOneAndUpdate: function (req, res) {
-    db.Countries.findById({ _id: req.params.id })
+    db.Country.findById({ _id: req.params.id })
       .then((dbModel) => dbModel.update())
       .then((dbModel)=>
       res.json(dbModel))
@@ -38,7 +38,7 @@ module.exports = {
 
    deleteCountry: function(req, res) {
     const id = req.params.id;
-    db.Countries.findByIdAndRemove(id).
+    db.Country.findByIdAndRemove(id).
         then((result) => {
             if (result) {
                 res.status(202).send({ message: 'deleted' })
@@ -54,7 +54,7 @@ module.exports = {
 
    readCountry: function(req, res) {
     const id = req.params.id;
-    db.Countries.findById(id)
+    db.Country.findById(id)
         .then((result) => {
             console.log('result' + result.uri);
   
@@ -68,7 +68,7 @@ module.exports = {
    updateCountry: function(req, res) {
     const id = req.params.id;
   
-    db.Countries.findByIdAndUpdate(id, req.body).
+    db.Country.findByIdAndUpdate(id, req.body).
         then((result) => {
             if (result) {
                 res.status(200).send({ message: 'updated' })

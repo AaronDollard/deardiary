@@ -1,15 +1,13 @@
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-const user = require('./routes/user');
-const mongoose = require('mongoose');
-const config = require('./config');
-var cors = require('cors');
+var express = require('express');
 var indexRouter = require('./routes/index');
-
-const app = express();
+var usersRouter = require('./routes/user');
+var cors= require('cors');
+var app = express();
 const port = 3000;
 
+
+var mongoose = require('mongoose');
+var config = require('./config');
 
 // Define the database connecton and connect to it.
 // Errors awill be logged to the console.
@@ -47,8 +45,8 @@ app.use(cors(
 }
 ));
 
-app.use('/countries', indexRouter);
-app.use('/user', user);
+app.use('/country', indexRouter);
+app.use('/user', usersRouter);
 
 
 app.get('/', (req, res) => {

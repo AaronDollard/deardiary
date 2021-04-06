@@ -8,7 +8,7 @@ import { ValidateService } from '../../_services/validate.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.less']
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
   //booleans for showing/hiding passwords

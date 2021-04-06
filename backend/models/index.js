@@ -1,3 +1,3 @@
 module.exports = {
-    Countries: require("./country"),
+    Country: require("./country"),
 }

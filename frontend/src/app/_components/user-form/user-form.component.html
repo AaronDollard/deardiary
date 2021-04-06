@@ -2,29 +2,24 @@
 
   <div class="form-container">
     <h1>Dear diary,</h1>
-    <form class="left-form">
-      <div class="form-group">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+
         <label for="countryInput">Today I visited</label>
-        <input formControlName="name" type="text" class="form-control" id="countryInput" placeholder="country name">
-      </div>
-  
-      <div class="form-group">
+        <input ngModel required #name="ngModel" name="name"  type="text" class="form-control"  placeholder="country name">
+
         <label for="nationalityInput">Their nationality is</label>
-        <input formControlName="nationality" type="text" class="form-control" id="nationalityInput" placeholder="nationality">
-      </div>
-  
-      <div class="form-group">
+        <input ngModel required #nationality="ngModel" name="nationality"  type="text" class="form-control" placeholder="nationality">
+
         <label for="natLangInput">Their national language is</label>
-        <input formControlName="natLang" type="text" class="form-control" id="natLangInput" placeholder="national language">
-      </div>
-  
-        <!--bottom of Register form-->
+        <input ngModel required #natLang="ngModel" name="natLang"  type="text" class="form-control" placeholder="national language">
+
+        <label for="natLangInput">Comments about this country</label>
+        <input ngModel required #note="ngModel" name="note" type="text" class="form-control" placeholder="national language">
+
         <div class="form-group" style="text-align:center;">
-          <button type="button" class="btn btn-dark">Submit</button>
+          <button type="submit" class="btn btn-dark">Submit</button>
       </div>
     </form>
   </div>
-
-
 </div>
 

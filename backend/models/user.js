@@ -6,11 +6,11 @@ var userSchema = new Schema({
         email: { type: String, require: true },
         password: { type: String, require: true },
         creation_dt: { type:Date, require:true},
-        role: { type: String, default: "user", enum: ["user", "admin"]},
-        countries: [{
+        role: { type: String, default: "adventurer", enum: ["adventurer", "admin"]},
+        country: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'countries'
+            ref: 'Country'
         }]
     });
 
-    module.exports = mongoose.model('user', userSchema);
+    module.exports = mongoose.model('User', userSchema);

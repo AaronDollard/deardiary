@@ -13,25 +13,25 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <li  routerLinkActive="active" class="nav-item">
-        <a class="nav-link" [routerLink]="['/user']" >Countries</a>
+      <li routerLinkActive="active" class="nav-item">
+        <a *ngIf = "!userService.loggedIn()" class="nav-link" [routerLink]="['/countries']">Countries</a>
       </li>
-      <li  routerLinkActive="active" class="nav-item">
-        <a class="nav-link" [routerLink]="['/form']" >Diary</a>
+      <li routerLinkActive="active" class="nav-item">
+        <a *ngIf = "!userService.loggedIn()" class="nav-link" [routerLink]="['/user/diary']">Diary</a>
       </li>
 
 
       <div class="navbar-nav">
-        <a  class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/profile']">Profile</a>
+        <a *ngIf = "!userService.loggedIn()" class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/profile']">Profile</a>
       </div>
       <div class="navbar-nav">
-        <a  class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/login']">Login</a>
+        <a *ngIf = "userService.loggedIn()" class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/login']">Login</a>
       </div>
       <div class="navbar-nav">
-        <a   class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/register']">Register</a>
+        <a *ngIf = "userService.loggedIn()"class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/register']">Register</a>
       </div>
       <div class="navbar-nav">
-        <a  class="nav-item nav-link" [routerLink]="['/home']">Logout</a>
+        <a  *ngIf = "!userService.loggedIn()" (click)="logout()"  class="nav-item nav-link" [routerLink]="['/home']">Logout</a>
       </div>
     </ul>
   </div>

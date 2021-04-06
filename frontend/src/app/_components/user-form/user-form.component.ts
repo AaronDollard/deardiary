@@ -3,6 +3,7 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { UserService } from '../../_services/user.service';
 import { Router } from '@angular/router';
 import { ICountry } from '@app/_models/country';
+import { EntryService } from '../../_services/entry.service';
 
 @Component({
   selector: 'app-user-form',
@@ -23,39 +24,18 @@ export class UserFormComponent implements OnInit {
   //Implement the user service
   constructor(
     private _router:Router, 
-    private _userService:UserService
+    private _userService:UserService,
+    private _entryService: EntryService
     ) { }
 
   ngOnInit(): void {
   }
 
-  // getAll(): void {
-  //   this._userService.getAllEntries().subscribe((data: any[]) => {
-  //     this.countries = data || [];
-  //   });
-  // }
-
-  // onSubmit(f: NgForm) {
-  //   this.userId = this._authService.ObtainID();
-  //   this._userService.makeEntry(this.userId, f.value).subscribe((data) => {
-  //     this.getAll();
-  //     f.resetForm();
-  //     this._router.navigate(['user']);
-  //   });
-  // }
-
-  //Log country function
-  // logCountry() {
-  //   if (!this.countryForm.valid) {
-  //     console.log('Invalid');
-  //     return;
-  //   }
-  
-  //   //Passing the post from the user Service and using the countryform
-  //   this._userService.postCountry(JSON.stringify(this.countryForm.value))
-  //   .subscribe(
-  //   //If it is valid, write to console log the values
-  //   data => { console.log(data), this._router.navigate(['/user']);},
-  //   error => console.log(error)
-  //   )}
+  onSubmit(f: NgForm) {
+    this.userId = this._userService.ObtainID();
+    this._entryService.makeCountry(this.userId, f.value).subscribe(() => {
+      f.resetForm();
+      this._router.navigate(['profile']);
+    });
+  }
 }

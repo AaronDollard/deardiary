@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICountry } from 'src/app/_models/country';
 import { UserService } from '../../_services/user.service';
-
+import { EntryService } from '../../_services/entry.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -11,12 +11,9 @@ import { UserService } from '../../_services/user.service';
 })
 export class UserDashboardComponent implements OnInit {
 
-  //Country list for displaying
-  countrylist: ICountry[];
-  searchFilter: string;
-  message: string;
-
-  constructor(private _router: Router, private _userService: UserService) { }
+  constructor( 
+    private _userService: UserService,
+    private _entryService: EntryService) { }
 
   ngOnInit(): void {
   }

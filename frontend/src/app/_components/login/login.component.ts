@@ -6,7 +6,7 @@ import { UserService } from '../../_services/user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.less']
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   hide = true;
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this._userService.login(JSON.stringify(this.loginForm.value)).subscribe(
       (response) => {
         console.log("Entered the success method in the login component");
-        this._router.navigate(["/"]);
+        this._router.navigate(["/home"]);
       },
       (error) => {
       }

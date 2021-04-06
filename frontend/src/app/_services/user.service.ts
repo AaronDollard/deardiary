@@ -18,6 +18,7 @@ export class UserService {
   BASE_URL = environment.apiUrl;
   authToken: any;
   user: any;
+  userLogged: any;
   CurrentUser: IUser;
   CredentialsUsed = false;
   id: string;
@@ -26,6 +27,8 @@ export class UserService {
   success: boolean;
   TokenForIdentification:any;
   helper = new JwtHelperService();
+  jwtHelper: JwtHelperService;
+
 
   currentUser: IUser = {
     _id: null,
@@ -104,13 +107,18 @@ getUserName() {
   }
 }
 
-getBookings(id: string): Observable<IUser> {
-  return this._http.get<IUser>(`${this.BASE_URL}/user/${id}/countries`);
+getEntries(id: string): Observable<IUser> {
+  return this._http.get<IUser>(`${this.BASE_URL}/user/${id}/country`);
 }
 
-loggedIn() {
+loggedIn(){
   this.loadToken();
-  return this.helper.isTokenExpired(this.authToken); //False if Token is good, True if not good
+  const helper = new JwtHelperService();
+  return helper.isTokenExpired(this.authToken);
+}
+
+isLoggedOut() {
+  return !this.loggedIn();
 }
 
 loadToken() {
@@ -124,11 +132,9 @@ returnToken(){
   return this?.authToken;
 }
 
-
-//clears local storage
 logout() {
   this.authToken = null;
-  this.user = null;
+  this.userLogged = null;
   localStorage.clear();
 }
 handleError(err) {
