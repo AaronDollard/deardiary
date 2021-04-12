@@ -7,6 +7,7 @@ import { ProfileComponent } from './_components/profile/profile.component';
 import { RegisterComponent } from './_components/register/register.component';
 import { HomeComponent } from './_components/home/home.component';
 import { UserFormComponent } from './_components/user-form/user-form.component'
+import { ViewentryComponent } from './_components/viewentry/viewentry.component'
 import { AuthGuard } from './_guards/auth.guard';
 
   const routes: Routes = [
@@ -19,9 +20,11 @@ import { AuthGuard } from './_guards/auth.guard';
 
     {path:'countries', component: UserDashboardComponent, canActivate: [AuthGuard] },
 
-    {path:'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+    {path:'profile', component: ProfileComponent },
+    {path:'profile/view/:id', component: ViewentryComponent },
+    
     {path:'user/diary', component: UserFormComponent, canActivate: [AuthGuard] },
-    {path:'user/update/:id', component: CountryComponent, canActivate: [AuthGuard] }
+
   ];
 
 

@@ -1,20 +1,34 @@
 <div class="row">
 
-  <div class="form-container">
+  <div class="col-sm-12">
     <h1>Dear diary,</h1>
     <form #f="ngForm" (ngSubmit)="onSubmit(f)">
 
+      <div class="form-group" >
         <label for="countryInput">Today I visited</label>
         <input ngModel required #name="ngModel" name="name"  type="text" class="form-control"  placeholder="country name">
+      </div>
 
+        <div class="form-group" >
         <label for="nationalityInput">Their nationality is</label>
         <input ngModel required #nationality="ngModel" name="nationality"  type="text" class="form-control" placeholder="nationality">
+      </div>
 
+        <div class="form-group" >
         <label for="natLangInput">Their national language is</label>
         <input ngModel required #natLang="ngModel" name="natLang"  type="text" class="form-control" placeholder="national language">
+      </div>
 
+      <div class="form-group"  >
+        <label for="natLangInput">2 Digit Country Code.</label>
+        <input ngModel required #code="ngModel" name="code" type="text" class="form-control" placeholder="country code">
+        <p style="font-size: smaller;">Unsure? <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">Click here</a></p>
+      </div>
+
+        <div class="form-group"  >
         <label for="natLangInput">Comments about this country</label>
         <input ngModel required #note="ngModel" name="note" type="text" class="form-control" placeholder="national language">
+      </div>
 
         <div class="form-group" style="text-align:center;">
           <button type="submit" class="btn btn-dark">Submit</button>

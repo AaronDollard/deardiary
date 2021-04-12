@@ -24,7 +24,8 @@ import { AuthGuard } from './_guards/auth.guard';
 import { HomeComponent } from './_components/home/home.component';
 import { EntryService } from './_services/entry.service';
 import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table'  
+import { MatTableModule } from '@angular/material/table' ;
+import { ViewentryComponent } from './_components/viewentry/viewentry.component' 
 
 //Used for guards
 export function tokenGetter(){ return localStorage.loadToken("token");
@@ -56,7 +57,8 @@ export function tokenGetter(){ return localStorage.loadToken("token");
         LoginComponent,
         ProfileComponent,
         HomeComponent
-    ],
+,
+        ViewentryComponent    ],
     providers: [ UserService, ValidateService, AuthGuard, EntryService ],
     bootstrap: [ AppComponent]
 })

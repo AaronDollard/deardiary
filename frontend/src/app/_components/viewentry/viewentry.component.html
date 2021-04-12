@@ -1,0 +1,37 @@
+<div class="row">
+
+  <div class="col-sm-12">
+    <h1>Update your diary,</h1>
+    <form #f="ngForm" class="update-form" (ngSubmit)="save(f)" novalidate>
+
+      <div class="form-group">
+        <label for="countryInput">Today I visited</label>
+        <input ngModel #country.name="ngModel" #name="ngModel" name="name" type="text" class="form-control"
+          placeholder="{{country?.name}}">
+      </div>
+
+      <div class="form-group">
+        <label for="natLangInput">Their national language is</label>
+        <input ngModel #country.natLang="ngModel" #natLang="ngModel" name="natLang" type="text" class="form-control"
+          placeholder="{{country?.natLang}}">
+      </div>
+
+
+      <div class="form-group">
+        <label for="codeInput">2 Digit Country Code</label>
+        <input ngModel #country.code="ngModel" #code="ngModel" name="code" type="text" class="form-control"
+          placeholder="{{country?.code}}">
+      </div>
+
+      <div class="form-group">
+        <label for="noteInput">Comments about this country</label>
+        <input ngModel #country.note="ngModel" #note="ngModel" name="note" type="text" class="form-control"
+          placeholder="{{country?.note}}">
+      </div>
+
+      <div class="form-group" style="text-align:center;">
+        <button type="submit" class="btn btn-dark">Update Entry</button>
+      </div>
+    </form>
+  </div>
+</div>

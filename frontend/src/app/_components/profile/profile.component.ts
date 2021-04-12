@@ -11,8 +11,8 @@ import { mergeMap } from 'rxjs/operators';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  public entry: ICountry;
-  public entries: ICountry[];
+  public country: ICountry;
+  public countries: ICountry[];
   
   username: String = "";
   userId: string = "";
@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
   public errorMsg: string;
   public successMsg: string;
 
-  public columns = ["name", "nationality", "language"];
+  public columns = ["flag", "name", "nationality", "language", "view", "delete"];
   searchFilter: string;
 
   constructor(
@@ -31,13 +31,14 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getTheEntries();
+    const id = this._router.snapshot.paramMap.get('id');
   }
   
   getTheEntries() {
     this.userId = this._user.ObtainID();
     this.entryService.getCountries(this.userId).subscribe(
-      (entry: ICountry) => {
-        this.entry = entry;
+      (country: ICountry) => {
+        this.country = country;
       },
       (error) => {
         this.error = error.message;
@@ -45,14 +46,13 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  cancelBooking(id: string) {
+  deleteEntry(id: string) {
     this.entryService
       .cancelCountry(id)
       .pipe(mergeMap(() => this.entryService.getCountriesForCancel()))
       .subscribe(
-        (entries: ICountry[]) => {
-          this.entries = entries;
-          this.successMsg = "Entry Deleted";
+        (countries: ICountry[]) => {
+          this.countries = countries;
         },
         (error: ErrorEvent) => {
           this.errorMsg = error.error.message;

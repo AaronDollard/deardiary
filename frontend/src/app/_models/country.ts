@@ -3,5 +3,6 @@ export interface ICountry {
     name: string;
     nationality: string;
     natLang: string;
+    code: string;
     note: string;
 }

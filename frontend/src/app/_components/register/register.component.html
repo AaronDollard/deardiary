@@ -4,26 +4,47 @@
     <h1>Register below</h1>
 
     <div class="form-container">
-    <form [formGroup]="registerForm" (ngSubmit)="register()" >
-
-            <input id="email" formControlName="email" placeholder="Enter your email" />
-
-            <input id="username" formControlName="username" placeholder="Enter your username" />
-
-            <input id="password1" formControlName="password" placeholder="Enter your password"/>
-
-
-
-            <input id="password2" formControlName="cpass" placeholder="Enter your password"/>
-
-
-          <div>
-            <button id="functionBtn" class="btn btn-dark" type="submit">Register</button>
-            <button id="functionBtn" class="btn btn-dark" routerLink="/login">Have An Account? Login</button>
+      <form [formGroup]="registerForm" (ngSubmit)="register()">
+        
+        
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">@Username</span>
           </div>
+          <input type="text" class="form-control" formControlName="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
 
-      
-    </form>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+          </div>
+          <input type="text" formControlName="email"  class="form-control" placeholder="Email" aria-label="Email" aria-describedby="inputGroup-sizing-default">
+        </div>
+
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Password</span>
+          </div>
+          <input type="text" formControlName="password"  class="form-control" placeholder="Password" aria-label="Email" aria-describedby="inputGroup-sizing-default">
+        </div>
+
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Confirm Password</span>
+          </div>
+          <input type="text" formControlName="cpass"  class="form-control" placeholder="Confirm Password" aria-label="Email" aria-describedby="inputGroup-sizing-default">
+        </div>
+
+        <div>
+          <button id="functionBtn" class="btn btn-dark" type="submit">Register</button>
+          <button id="functionBtn" class="btn btn-dark" routerLink="/login">Have An Account? Login</button>
+        </div>
+
+
+      </form>
     </div>
 
   </div>

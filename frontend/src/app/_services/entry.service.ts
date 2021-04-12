@@ -26,6 +26,7 @@ export class EntryService {
   getCountry(id: string): Observable<ICountry> {
     return this.http.get<ICountry>(BASE_URL + `country/${id}`)
   }
+  
   updateCountry(country, data): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
