@@ -56,8 +56,7 @@ export function tokenGetter(){ return localStorage.loadToken("token");
         RegisterComponent,
         LoginComponent,
         ProfileComponent,
-        HomeComponent
-,
+        HomeComponent,
         ViewentryComponent    ],
     providers: [ UserService, ValidateService, AuthGuard, EntryService ],
     bootstrap: [ AppComponent]
