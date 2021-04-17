@@ -3,25 +3,20 @@ var User = require("../models/user");
 const Country = require("../models/country");
 const checkAuth = require("../utilities/check-auth");
 
-// Bring in the User Registration Function, User Login Function
 const {
     userRegister,
     userLogin,
     checkRole
 } = require("../utilities/authentication");
 
-
-// Customer Registration Route
 router.post("/register-user", async (req, res) => {
   await userRegister(req.body, "adventurer", res);
 });
 
-// Manager  Registration Route
 router.post("/register-admin", checkRole(["admin"]), async (req, res) => {
   await userRegister(req.body, "admin", res);
 });
 
-/* #region  Login */
   router.post("/login", async (req, res) => {
     try {
       await userLogin(req.body, res);
@@ -34,14 +29,10 @@ router.post("/register-admin", checkRole(["admin"]), async (req, res) => {
     }
   });
 
-
-// Get User Route 
 router.get("/user", checkAuth, async (req, res) => {
-  console.log("USER IN THE GET USER METHOD", req.user._id.id);
   let id = req.user._id.id;
   getUserEntries(id);
 });
-
 
 async function getUserEntries(req, res, next) {
   const { userId } = req.params;

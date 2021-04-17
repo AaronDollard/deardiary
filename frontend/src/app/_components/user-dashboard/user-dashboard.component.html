@@ -1,18 +1,5 @@
-<!-- <div id="box">
-<h3>Below is a list of countries I have visited...</h3>
-<input [(ngModel)]="searchFilter" style="margin-top: 5px;" class="form-control mr-sm-2" type="search" placeholder="Search">
+<div id="box">
+<h1><img src="https://www.countryflags.io/{{country?.code}}/flat/64.png"><b>{{country?.name}}</b><img src="https://www.countryflags.io/{{country?.code}}/flat/64.png"></h1>
+
 </div>
 
-<div class="row" *ngFor="let c of countrylist | filter:searchFilter">
-    <div class="listBox">
-        <div class="column">
-            <h5>{{c.name}}</h5>
-            <p><b>Nationality:</b> {{c.nationality}}</p>
-            <p><b>Language:</b> {{c.natLang}}</p>
-        </div>
-        <p><b>Notes:</b> {{c.note}}</p>
-        <div class="column">
-            <a class="btn btn-dark" id="functionBtn" [routerLink]="[c._id]">Go to</a>
-        </div>
-    </div>
-</div> -->

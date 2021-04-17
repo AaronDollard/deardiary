@@ -7,6 +7,7 @@ import { Input, Output, EventEmitter } from '@angular/core';
 import { mergeMap } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 import { EntryService } from '@app/_services/entry.service';
+import { ICountry } from '@app/_models/country';
 
 @Component({
   selector: 'app-country',
@@ -16,14 +17,14 @@ import { EntryService } from '@app/_services/entry.service';
 
 export class CountryComponent implements OnInit {
 
-
   constructor(
+    private _user:UserService, 
+    private _entry: EntryService, 
     private _router:Router, 
-    private route: ActivatedRoute, 
-    private _userService: UserService,
-    private _entryService: EntryService) { }
+    private _route: ActivatedRoute) { }
 
   ngOnInit() {
-  };
+  }
+
 
 }

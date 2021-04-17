@@ -20,8 +20,8 @@ export class ProfileComponent implements OnInit {
   public errorMsg: string;
   public successMsg: string;
 
-  public columns = ["flag", "name", "nationality", "language", "view", "delete"];
-  searchFilter: string;
+  public columns = ["flag", "name", "nationality", "language", "edit", "delete", "view"];
+  Filter: string;
 
   constructor(
     private _router: ActivatedRoute,

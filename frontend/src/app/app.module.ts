@@ -18,6 +18,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 //services
+import { CountryapiService } from './_services/countryapi.service'
 import { UserService } from './_services/user.service';
 import { ValidateService } from './_services/validate.service';
 import { AuthGuard } from './_guards/auth.guard';
@@ -25,7 +26,8 @@ import { HomeComponent } from './_components/home/home.component';
 import { EntryService } from './_services/entry.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table' ;
-import { ViewentryComponent } from './_components/viewentry/viewentry.component' 
+import { ViewentryComponent } from './_components/viewentry/viewentry.component' ;
+import { AdminregisterComponent } from './_components/adminregister/adminregister.component'
 
 //Used for guards
 export function tokenGetter(){ return localStorage.loadToken("token");
@@ -57,8 +59,10 @@ export function tokenGetter(){ return localStorage.loadToken("token");
         LoginComponent,
         ProfileComponent,
         HomeComponent,
-        ViewentryComponent    ],
-    providers: [ UserService, ValidateService, AuthGuard, EntryService ],
+        ViewentryComponent ,
+        AdminregisterComponent,  
+    ],
+    providers: [ UserService, ValidateService, AuthGuard, EntryService, CountryapiService ],
     bootstrap: [ AppComponent]
 })
 export class AppModule { }

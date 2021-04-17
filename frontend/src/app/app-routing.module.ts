@@ -12,16 +12,17 @@ import { AuthGuard } from './_guards/auth.guard';
 
   const routes: Routes = [
     {path:'home', component:HomeComponent},
-    //{path:'dashboard/update/:id', component:AdmindashboardupdateComponent, canActivate: [ManagerGuard]},
-    //{path:'admin', component:StaffPageComponent, canActivate: [StaffGuard]},
 
     {path:'login', component:LoginComponent},
     {path:'register', component:RegisterComponent},
 
-    {path:'countries', component: UserDashboardComponent, canActivate: [AuthGuard] },
 
     {path:'profile', component: ProfileComponent },
-    {path:'profile/view/:id', component: ViewentryComponent },
+    {path:'profile/edit/:id', component: ViewentryComponent },
+    {path:'profile/view/:id', component: UserDashboardComponent, canActivate: [AuthGuard] },
+
+    //still need country compnent
+
     
     {path:'user/diary', component: UserFormComponent, canActivate: [AuthGuard] },
 
